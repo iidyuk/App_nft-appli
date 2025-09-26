@@ -1,0 +1,6 @@
+[submodule "App_Nft_WebApp"]
+	path = App_Nft_WebApp
+	url = git@github.com:iidyuk/App_Nft_WebApp.git
+[submodule "App_Nft_Contract"]
+	path = App_Nft_Contract
+	url = git@github.com:iidyuk/App_Nft_Contract.git
