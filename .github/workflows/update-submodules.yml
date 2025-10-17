@@ -1,0 +1,27 @@
+name: Manual Submodule Update
+
+on:
+  workflow_dispatch:  # 手動実行のみ
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # commit & push のために必要
+
+    steps:
+      # ✅ サブモジュールも含めてクローン（--init --recursive 相当）
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # ✅ サブモジュールをリモートの最新コミットへ更新
+      - run: |
+          git submodule update --remote
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Manual update of submodules" || echo "No changes"
+          git push
